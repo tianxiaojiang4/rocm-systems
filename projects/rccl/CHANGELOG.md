@@ -20,6 +20,7 @@ Full documentation for RCCL is available at [https://rccl.readthedocs.io](https:
 * One-sided RMA supports multiple contexts and signals; the previous restriction to context 0 and signal index 0 has been lifted (`numRmaCtx` / `numRmaSig`).
 * Updated the RMA plugin interface to v15.
 * Reduced communicator host memory by allocating topology path link arrays to their actual length.
+* Retuned the symmetric AllReduce and ReduceScatter kernels for gfx950. The block width is now selected per collective and message size instead of a fixed 256 threads, and the work partitioning and unroll factors in the load-direct kernels were refitted to the 64-lane wavefront. AllGather, the multi-node GIN kernels, and all other architectures are unchanged.
 
 ### Resolved issues
 * Restored topo tuning-model init (`ncclTopoTuneModel`) after the 2.31 `ncclTuningInit` switch so multi-node kernels do not launch with `blockDim.x=0`.
