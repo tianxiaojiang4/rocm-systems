@@ -22,9 +22,8 @@
 #define NCCL_CE_AR_MAX_MSG_BYTES (256ull * 1024 * 1024)
 
 // Total payload capacity of one reusable CE AllReduce staging slot. Messages
-// larger than this are pipelined; sizing each slot to NCCL_CE_AR_MAX_MSG_BYTES
-// wastes VMM (512 MiB with two slots) and fails late VA reservations on ROCm.
-#define NCCL_CE_AR_STAGING_BYTES (16ull * 1024 * 1024)
+// larger than this are pipelined;
+#define NCCL_CE_AR_STAGING_BYTES (256ull * 1024 * 1024)
 
 #ifndef NCCL_CE_REDUCE_MAX_BLOCKS
 #define NCCL_CE_REDUCE_MAX_BLOCKS 46
