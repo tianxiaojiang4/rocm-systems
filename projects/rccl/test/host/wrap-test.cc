@@ -4619,7 +4619,7 @@ TEST(WrapMicrotestIsolated, SelectReduceScatter_SymmetricAcceptsSumOrAvg) {
         comm->nNodes = 1;
         rcclCollDecision sumDecision{};
         EXPECT_EQ(ncclSuccess, rcclSelectReduceScatter(comm, nullptr, nullptr, /*recvcount=*/8, ncclFloat32,
-                                                        ncclSum, /*query=*/false, &sumDecision));
+                                                        ncclSum, /*stream=*/nullptr, /*query=*/false, /*graphCapturingHint=*/false, &sumDecision));
         EXPECT_EQ((int)rcclAddonAlgos_t::RCCL_SYMMETRIC, sumDecision.algo);
         rcclCollDecision avgDecision{};
         EXPECT_EQ(ncclSuccess, rcclSelectReduceScatter(comm, nullptr, nullptr, /*recvcount=*/8, ncclFloat32,
@@ -4745,7 +4745,7 @@ TEST(WrapMicrotestIsolated, SelectReduceScatter_DdaFabricLLThresholdBoundary) {
         comm->nNodes = 1;
         rcclCollDecision atCutoff{};
         EXPECT_EQ(ncclSuccess, rcclSelectReduceScatter(comm, nullptr, nullptr, /*recvcount=*/8, ncclFloat32,
-                                                        ncclSum, /*query=*/false, &atCutoff));
+                                                        ncclSum, /*stream=*/nullptr, /*query=*/false, /*graphCapturingHint=*/false, &atCutoff));
         EXPECT_EQ((int)rcclAddonAlgos_t::RCCL_DDA_FABRIC_LL, atCutoff.algo);
         rcclCollDecision pastCutoff{};
         EXPECT_EQ(ncclSuccess, rcclSelectReduceScatter(comm, nullptr, nullptr, /*recvcount=*/9, ncclFloat32,
